@@ -1,0 +1,28 @@
+ballistics main
+{
+    Shot::current_type = Shot::PISTOL;
+  Shot::current_geometry = &sphere_geometry;
+  Shot::current_shader = shader_program;
+  Shot::current_model_matrix = glm::scale(glm::mat4(1.0), glm::vec3(0.1));
+      Shot::update(delta_time);
+    Shot::addShotsToScene(scene);
+}
+
+ballistic multithreaded with pointers
+{
+    Shot::current_type = Shot::FIREBALL;
+  Shot::current_geometry = &sphere_geometry;
+  Shot::current_shader = shader_program;
+  Shot::current_model_matrix = glm::scale(glm::mat4(1.0), glm::vec3(0.1));
+  Shot::addShotsToScene(scene);
+  std::thread physics_thread(Shot::update, delta_time);
+  scene.drawables.push_back(new DrawableGeometry(&plane_geometry, model, shader_program));
+  scene.drawScene();
+  scene.clearScene();
+  glfwSwapBuffers(window);
+  physics_thread.join();
+  //in mouse click
+  Shot::current_position = camera.position;
+  Shot::current_orientation = camera.front;
+  Shot::shoot();
+}
