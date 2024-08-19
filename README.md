@@ -1,1 +1,0 @@
-A game engine written in C++ using OpenGL, working on it.
