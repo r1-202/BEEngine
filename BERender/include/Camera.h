@@ -11,6 +11,7 @@
 namespace BERender
 {
   using namespace glm;
+  enum Camera_Movement{FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN};
 }
 
 #endif //CAMERA_H
