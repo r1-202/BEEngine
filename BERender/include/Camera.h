@@ -12,7 +12,7 @@ namespace BERender
 {
   class Camera
   {
-    public:
+  public:
     glm::vec3 position;
     glm::vec3 front;
     glm::vec3 up;
@@ -26,14 +26,15 @@ namespace BERender
     float mouse_sensitivity;
     float zoom;
 
-    Camera(glm::vec3 position = glm::vec3(0,0,0),glm::vec3 up = glm::vec3(0,1,0),float yaw = -90.0f, float pitch = 0.0f);
+    Camera(glm::vec3 position = glm::vec3(0, 0, 0), glm::vec3 up = glm::vec3(0, 1, 0), float yaw = -90.0f, float pitch = 0.0f);
     glm::mat4 getViewMatrix();
     void processKeyboard(Direction direction, float dt);
-    void processMouseMovement(float xoffset, float yoffset, bool constraint_pitch=false);
+    void processMouseMovement(float xoffset, float yoffset, bool constraint_pitch = false);
     void processMouseScroll(float yoffset);
-    private:
+
+  private:
     void updateCameraVectors();
   };
 }
 
-#endif //CAMERA_H
+#endif // CAMERA_H
