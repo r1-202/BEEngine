@@ -4,3 +4,4 @@ project(BEEngine VERSION 1.0 LANGUAGES CXX)
 
 add_subdirectory(BERender)
 
+add_subdirectory(Test)
