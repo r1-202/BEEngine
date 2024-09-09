@@ -1,8 +1,9 @@
-#include "Camera.h"
+#include <Camera.h>
 
 using namespace BERender;
 
-Camera::Camera(glm::vec3 position = glm::vec3(0, 0, 0), glm::vec3 up = glm::vec3(0, 1, 0), float yaw = -90.0f, float pitch = 0.0f) : front(glm::vec3(0, 0, -1)), movement_speed(2.5f), mouse_sensitivity(0.1f), zoom(45.0f)
+Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : 
+front(glm::vec3(0, 0, -1)), movement_speed(2.5f), mouse_sensitivity(0.1f), zoom(45.0f)
 {
   this->position = position;
   world_up = up;
@@ -50,7 +51,7 @@ void Camera::processKeyboard(Direction direction, float dt)
     position += velocity * up;
   }
 }
-void Camera::processMouseMovement(float xoffset, float yoffset, bool constraint_pitch = false)
+void Camera::processMouseMovement(float xoffset, float yoffset, bool constraint_pitch)
 {
   xoffset *= mouse_sensitivity;
   yoffset *= mouse_sensitivity;
