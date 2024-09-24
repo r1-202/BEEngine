@@ -1,4 +1,4 @@
-add_library(BERender src/Camera.cpp)
+add_library(BERender src/Camera.cpp src/Shader.cpp)
 
 target_include_directories(BERender PUBLIC ${CMAKE_SOURCE_DIR}/common/include 
                             PUBLIC include)
