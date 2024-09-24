@@ -16,7 +16,6 @@ int last_y;
 
 void processInput(GLFWwindow *window)
 {
-  system("cls");
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
   {
     glfwSetWindowShouldClose(window, true);
@@ -46,7 +45,6 @@ void processInput(GLFWwindow *window)
   {
     camera.processKeyboard(BERender::DOWN, delta_time);
   }
-  std::cout << '(' << camera.position.x << ',' << camera.position.y << ',' << camera.position.z << ')' << '\n';
 }
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
