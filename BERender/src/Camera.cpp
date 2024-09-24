@@ -48,7 +48,7 @@ void Camera::processKeyboard(Direction direction, float dt)
 
   if (direction == DOWN)
   {
-    position += velocity * up;
+    position -= velocity * up;
   }
 }
 void Camera::processMouseMovement(float xoffset, float yoffset, bool constraint_pitch)
