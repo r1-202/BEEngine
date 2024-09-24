@@ -28,7 +28,7 @@ namespace BERender
     Camera(glm::vec3 position = glm::vec3(0, 0, 0), glm::vec3 up = glm::vec3(0, 1, 0), float yaw = -90.0f, float pitch = 0.0f);
     glm::mat4 getViewMatrix();
     void processKeyboard(Direction direction, float dt);
-    void processMouseMovement(float xoffset, float yoffset, bool constraint_pitch = false);
+    void processMouseMovement(float xoffset, float yoffset, bool constraint_pitch = true);
     void processMouseScroll(float yoffset);
 
   private:
