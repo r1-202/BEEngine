@@ -103,7 +103,7 @@ int main()
   }
   glViewport(0, 0, screen_width, screen_height);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-  //glfwSetCursorPosCallback(window, mouse_callback);
+  glfwSetCursorPosCallback(window, mouse_callback);
   while (!glfwWindowShouldClose(window))
   {
     double current_frame = glfwGetTime();
