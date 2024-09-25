@@ -79,9 +79,10 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 int main()
 {
 
-  float corners[]={0,0,0,1,0,0,1,-1,0};
-  unsigned int triangle[]={1,3,2};
-
+  float corners[] = {0., 0., -1.,
+                     1., 0., -1.,
+                     1., -1., -1.};
+  unsigned int triangle[] = {0, 2, 1};
 
   screen_width = 800;
   screen_height = 600;
@@ -116,6 +117,7 @@ int main()
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
   glfwSetScrollCallback(window, scroll_callback);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
                                           (float)screen_width / (float)screen_height,
@@ -125,8 +127,8 @@ int main()
 
   glm::mat4 model = glm::mat4(1.0f);
 
-  BERender::Shader shader_program("Shaders/ShaderTest/VertexShader.glsl",
-                                  "Shaders/ShaderTest/VertexShader.glsl");
+  BERender::Shader shader_program("Resources/Shaders/ShaderTest/VertexShader.glsl",
+                                  "Resources/Shaders/ShaderTest/FragmentShader.glsl");
 
   shader_program.use();
   shader_program.setMat4("projection", projection);
@@ -134,16 +136,15 @@ int main()
 
   unsigned int VAO, EBO, VBO;
   glGenVertexArrays(1, &VAO);
-  glGenBuffers(1,&VBO);
+  glGenBuffers(1, &VBO);
   glBindVertexArray(VAO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glBufferData(GL_ARRAY_BUFFER, 9*sizeof(float),&corners,GL_STATIC_DRAW);
-  glGenBuffers(1,&EBO);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER,3*sizeof(unsigned int),&triangle, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), &corners, GL_STATIC_DRAW);
+  glGenBuffers(1, &EBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), &triangle, GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),0);
-
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
   while (!glfwWindowShouldClose(window))
   {
@@ -156,10 +157,15 @@ int main()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     view = camera.getViewMatrix();
+    glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
+                                            (float)screen_width / (float)screen_height,
+                                            0.1f, 100.0f);
     shader_program.setMat4("view", view);
-    glDrawElements(GL_TRIANGLES, 1, GL_UNSIGNED_INT,0);
+    shader_program.setMat4("projection", projection);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
     glfwSwapBuffers(window);
     glfwPollEvents();
+    std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';
   }
   glfwTerminate();
   return 0;
