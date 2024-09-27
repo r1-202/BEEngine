@@ -14,11 +14,12 @@ namespace BERender
     std::vector<unsigned int> indices;
     virtual void setup() = 0;
     void draw();
-    virtual void makeSphere();
-    virtual void makeUVSphere();
-    virtual void makeCube();
-    virtual void makePlane();
-    virtual void makeIcoSphere();
+    virtual void makeSphere() = 0;
+    virtual void makeUVSphere() = 0;
+    virtual void makeCube() = 0;
+    virtual void makePlane() = 0;
+    virtual void makeIcoSphere() = 0;
+    virtual ~GeometryTemplate() = 0;
   };
 
   class Geometry : public GeometryTemplate

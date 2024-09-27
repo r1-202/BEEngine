@@ -116,6 +116,9 @@ int main()
   glfwSetScrollCallback(window, scroll_callback);
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_BLEND);
+
   glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
                                           (float)screen_width / (float)screen_height,
                                           0.1f, 100.0f);
@@ -131,8 +134,8 @@ int main()
   shader_program.setMat4("projection", projection);
   shader_program.setMat4("model", model);
 
-  BERender::Geometry sphere;
-  sphere.makeIcoSphere();
+  BERender::Geometry geometry;
+  geometry.makePlane();
 
   while (!glfwWindowShouldClose(window))
   {
@@ -141,7 +144,7 @@ int main()
     last_frame = current_frame;
     processInput(window);
 
-    glClearColor(0.f, 0.f, 0.f, 1.f);
+    glClearColor(1.f, 1.f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     view = camera.getViewMatrix();
@@ -150,7 +153,7 @@ int main()
                                             0.1f, 100.0f);
     shader_program.setMat4("view", view);
     shader_program.setMat4("projection", projection);
-    sphere.draw();
+    geometry.draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
     std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';

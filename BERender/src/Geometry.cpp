@@ -10,6 +10,8 @@ void GeometryTemplate::draw()
   glBindVertexArray(0);
 }
 
+GeometryTemplate::~GeometryTemplate() {}
+
 Geometry::Geometry() {}
 
 Geometry::Geometry(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices)
@@ -419,7 +421,6 @@ void Shaper<VertexType>::makePlane(std::vector<VertexType> &vertices, std::vecto
   };
   vertices.clear();
   indices.clear();
-  material.diffuse_color = glm::vec3(0., 0., 0.4);
   for (unsigned int i = 0; i < 6; i++)
   {
     VertexType v;
