@@ -20,7 +20,7 @@ namespace BERender
 
   class CubeMap : Texture
   {
-    public:
+  public:
     void load(std::vector<std::string> faces);
   };
 }
