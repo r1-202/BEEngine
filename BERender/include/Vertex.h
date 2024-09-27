@@ -13,12 +13,23 @@ namespace BERender
     glm::vec2 texture_coordinates;
   };
 
-  class Vertextnbtn: public Vertex
+  class Vertextn : public Vertex
+  {
+    glm::vec3 tangent;
+  };
+
+  class Vertextnbtn : public Vertextn
   {
   public:
-    glm::vec3 tangent;
     glm::vec3 bitangent;
   };
+
+  class Vertexpn
+  {
+    glm::vec3 position;
+    glm::vec3 normal;
+  };
+  
 }
 
 #endif // VERTEX_H
