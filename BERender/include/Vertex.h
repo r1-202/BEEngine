@@ -15,6 +15,7 @@ namespace BERender
 
   class Vertextn : public Vertex
   {
+  public:
     glm::vec3 tangent;
   };
 
@@ -26,10 +27,11 @@ namespace BERender
 
   class Vertexpn
   {
+  public:
     glm::vec3 position;
     glm::vec3 normal;
   };
-  
+
 }
 
 #endif // VERTEX_H
