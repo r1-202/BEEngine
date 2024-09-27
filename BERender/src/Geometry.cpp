@@ -47,26 +47,31 @@ void Geometry::setup()
 void Geometry::makeCube()
 {
   Shaper<Vertex>::makeCube(vertices, indices);
+  setup();
 }
 
 void Geometry::makeIcoSphere()
 {
   Shaper<Vertex>::makeIcoSphere(vertices, indices);
+  setup();
 }
 
 void Geometry::makePlane()
 {
   Shaper<Vertex>::makePlane(vertices, indices);
+  setup();
 }
 
 void Geometry::makeSphere()
 {
   Shaper<Vertex>::makeSphere(vertices, indices);
+  setup();
 }
 
 void Geometry::makeUVSphere()
 {
   Shaper<Vertex>::makeUVSphere(vertices, indices);
+  setup();
 }
 
 Geometrypn::Geometrypn() {}
@@ -103,26 +108,31 @@ void Geometrypn::setup()
 void Geometrypn::makeCube()
 {
   Shaper<Vertexpn>::makeCube(vertices, indices);
+  setup();
 }
 
 void Geometrypn::makeIcoSphere()
 {
   Shaper<Vertexpn>::makeIcoSphere(vertices, indices);
+  setup();
 }
 
 void Geometrypn::makePlane()
 {
   Shaper<Vertexpn>::makePlane(vertices, indices);
+  setup();
 }
 
 void Geometrypn::makeSphere()
 {
   Shaper<Vertexpn>::makeSphere(vertices, indices);
+  setup();
 }
 
 void Geometrypn::makeUVSphere()
 {
   Shaper<Vertexpn>::makeUVSphere(vertices, indices);
+  setup();
 }
 
 template <class VertexType>
@@ -173,7 +183,6 @@ void Shaper<VertexType>::makeSphere(std::vector<VertexType> &vertices, std::vect
     indices.push_back(y + 1);
     indices.push_back(current + 1);
   }
-  setup();
 }
 
 template <class VertexType>
@@ -251,7 +260,6 @@ void Shaper<VertexType>::makeUVSphere(std::vector<VertexType> &vertices, std::ve
   indices.push_back(vertices.size() - 1);
   indices.push_back((X_SEGMENTS) * (Y_SEGMENTS - 1) - 1);
   indices.push_back(Y_SEGMENTS - 1 - 1);
-  setup();
 }
 
 template <class VertexType>
@@ -332,7 +340,6 @@ void Shaper<VertexType>::makeIcoSphere(std::vector<VertexType> &vertices, std::v
   }
   for (unsigned int i = 0; i < subdivisions; ++i)
     subdivide(vertices, indices);
-  setup();
 }
 
 template <class VertexType>
@@ -396,7 +403,6 @@ void Shaper<VertexType>::makeCube(std::vector<VertexType> &vertices, std::vector
     vertices.push_back(v);
     indices.push_back(i);
   }
-  setup();
 }
 
 template <class VertexType>
@@ -426,5 +432,4 @@ void Shaper<VertexType>::makePlane(std::vector<VertexType> &vertices, std::vecto
     vertices.push_back(v);
     indices.push_back(i);
   }
-  setup();
 }
