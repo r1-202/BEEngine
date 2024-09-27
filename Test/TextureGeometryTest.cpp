@@ -138,7 +138,7 @@ int main()
   shader_program.setMat4("model", model);
 
   BERender::Geometry geometry;
-  geometry.makeCube();
+  geometry.makePlane();
 
   while (!glfwWindowShouldClose(window))
   {
