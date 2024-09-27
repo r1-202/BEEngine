@@ -118,6 +118,9 @@ int main()
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
+  glEnable(GL_CULL_FACE);
+  glEnable(GL_DEPTH_TEST);
+
 
   glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
                                           (float)screen_width / (float)screen_height,
@@ -135,7 +138,7 @@ int main()
   shader_program.setMat4("model", model);
 
   BERender::Geometry geometry;
-  geometry.makePlane();
+  geometry.makeCube();
 
   while (!glfwWindowShouldClose(window))
   {
@@ -146,7 +149,6 @@ int main()
 
     glClearColor(1.f, 1.f, 1.f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
     view = camera.getViewMatrix();
     glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
                                             (float)screen_width / (float)screen_height,
