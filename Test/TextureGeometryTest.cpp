@@ -114,7 +114,7 @@ int main()
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
   glfwSetScrollCallback(window, scroll_callback);
-  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
@@ -130,8 +130,8 @@ int main()
 
   glm::mat4 model = glm::mat4(5.0f);
 
-  BERender::Shader shader_program("Resources/Shaders/ShaderTest/VertexShader.glsl",
-                                  "Resources/Shaders/ShaderTest/FragmentShader.glsl");
+  BERender::Shader shader_program("Resources/Shaders/TextureTest/VertexShader.glsl",
+                                  "Resources/Shaders/TextureTest/FragmentShader.glsl");
 
   shader_program.use();
   shader_program.setMat4("projection", projection);
@@ -167,7 +167,7 @@ int main()
     geometry.draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
-    std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';
+    // std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';
   }
   glfwTerminate();
   return 0;

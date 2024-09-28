@@ -1,7 +1,7 @@
 #version 330 core
 out vec4 FragColor;
 
-sampler2D image_texture;
+uniform sampler2D image_texture;
 
 in VS_OUT
 {

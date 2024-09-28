@@ -10,14 +10,22 @@ target_include_directories(ShaderTest PUBLIC ${CMAKE_SOURCE_DIR}/common/include)
 
 target_link_libraries(ShaderTest PUBLIC BERender)
 
-add_custom_command(
-  TARGET ShaderTest POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_directory
-  ${CMAKE_SOURCE_DIR}/Resources
-  ${CMAKE_CURRENT_BINARY_DIR}/Resources)
-
 add_executable(TextureGeometryTest TextureGeometryTest.cpp)
 
 target_include_directories(TextureGeometryTest PUBLIC ${CMAKE_SOURCE_DIR}/common/include)
   
 target_link_libraries(TextureGeometryTest PUBLIC BERender)
+
+file(GLOB_RECURSE RESOURCE_FILES "${CMAKE_SOURCE_DIR}/Resources/*")
+
+add_custom_command(
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Resources
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${CMAKE_SOURCE_DIR}/Resources
+  ${CMAKE_CURRENT_BINARY_DIR}/Resources
+  DEPENDS ${RESOURCE_FILES}
+  COMMENT "Copying Resources")
+
+add_custom_target(copy_resources ALL
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Resources
+)
