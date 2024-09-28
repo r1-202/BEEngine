@@ -140,6 +140,14 @@ int main()
   BERender::Geometry geometry;
   geometry.makePlane();
   geometry.vertices[0].texture_coordinates = glm::vec2(1.0,1.0);
+  geometry.vertices[1].texture_coordinates = glm::vec2(1.0,0.0);
+  geometry.vertices[2].texture_coordinates = glm::vec2(0.0,0.0);
+  geometry.vertices[3].texture_coordinates = glm::vec2(0.0,1.0);
+
+  BERender::Texture texture;
+  texture.load("Resources/Textures/container.png");
+  shader_program.setInt("image_texture", 0);
+  glBindTexture(GL_TEXTURE_2D, texture.id);
 
   while (!glfwWindowShouldClose(window))
   {

@@ -9,6 +9,8 @@ add_subdirectory(common/glfw-3.4)
 
 add_subdirectory(common/glad)
 
+add_subdirectory(common/stb_image)
+
 add_subdirectory(BERender)
 
 add_subdirectory(Test)
