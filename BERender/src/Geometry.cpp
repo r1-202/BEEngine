@@ -410,27 +410,22 @@ void Shaper<VertexType>::makeCube(std::vector<VertexType> &vertices, std::vector
 template <class VertexType>
 void Shaper<VertexType>::makePlane(std::vector<VertexType> &vertices, std::vector<unsigned int> &indices)
 {
-  float source[] = {
-      5.0f, 0.f, 5.0f, 0.0, 1.0, 0.0,   // 0
-      -5.0f, 0.f, -5.0f, 0.0, 1.0, 0.0, // 2
-      -5.0f, 0.f, 5.0f, 0.0, 1.0, 0.0,  // 1
-
-      5.0f, 0.f, 5.0f, 0.0, 1.0, 0.0,   // 3
-      5.0f, 0.f, -5.0f, 0.0, 1.0, 0.0,  // 5
-      -5.0f, 0.f, -5.0f, 0.0, 1.0, 0.0, // 4
+  glm::vec3 source[] = {
+      glm::vec3(1.0f, 0.f, 1.0f),   // 0
+      glm::vec3(1.0f, 0.f, -1.0f),  // 1
+      glm::vec3(-1.0f, 0.f, -1.0f), // 2
+      glm::vec3(-1.0f, 0.f, 1.0f)   // 3
   };
+
+  glm::vec3 normal = glm::vec3(0., 1., 0.);
   vertices.clear();
   indices.clear();
-  for (unsigned int i = 0; i < 6; i++)
+  for (unsigned int i = 0; i < 4; i++)
   {
     VertexType v;
-    v.position.x = source[i * 6];
-    v.position.y = source[i * 6 + 1];
-    v.position.z = source[i * 6 + 2];
-    v.normal.x = source[i * 6 + 3];
-    v.normal.y = source[i * 6 + 4];
-    v.normal.z = source[i * 6 + 5];
+    v.position = source[i];
+    v.normal = normal;
     vertices.push_back(v);
-    indices.push_back(i);
   }
+  indices = std::vector<unsigned int>{0, 1, 2, 0, 2, 3};
 }

@@ -128,7 +128,7 @@ int main()
 
   glm::mat4 view = camera.getViewMatrix();
 
-  glm::mat4 model = glm::mat4(1.0f);
+  glm::mat4 model = glm::mat4(5.0f);
 
   BERender::Shader shader_program("Resources/Shaders/ShaderTest/VertexShader.glsl",
                                   "Resources/Shaders/ShaderTest/FragmentShader.glsl");
@@ -139,6 +139,7 @@ int main()
 
   BERender::Geometry geometry;
   geometry.makePlane();
+  geometry.vertices[0].texture_coordinates = glm::vec2(1.0,1.0);
 
   while (!glfwWindowShouldClose(window))
   {
