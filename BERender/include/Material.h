@@ -37,7 +37,7 @@ namespace BERender
     virtual void setup();
   };
 
-  class MaterialUniform
+  class MaterialUniform : MaterialTemplate
   {
   public:
     glm::vec3 ambient_color;
