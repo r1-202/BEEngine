@@ -12,8 +12,8 @@ namespace BERender
   public:
     unsigned int VAO, VBO, EBO;
     std::vector<unsigned int> indices;
-    virtual void setup() = 0;
     void draw();
+    virtual void load() = 0;
     virtual void makeSphere() = 0;
     virtual void makeUVSphere() = 0;
     virtual void makeCube() = 0;
@@ -26,7 +26,7 @@ namespace BERender
   {
   public:
     std::vector<Vertex> vertices;
-    virtual void setup();
+    virtual void load();
     Geometry();
     Geometry(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices);
     virtual void makeSphere();
@@ -40,7 +40,7 @@ namespace BERender
   {
   public:
     std::vector<Vertexpn> vertices;
-    virtual void setup();
+    virtual void load();
     Geometrypn();
     Geometrypn(std::vector<Vertexpn> &vertices, std::vector<unsigned int> &indices);
     virtual void makeSphere();

@@ -18,10 +18,10 @@ Geometry::Geometry(std::vector<Vertex> &vertices, std::vector<unsigned int> &ind
 {
   this->vertices = vertices;
   this->indices = indices;
-  setup();
+  load();
 }
 
-void Geometry::setup()
+void Geometry::load()
 {
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
@@ -49,31 +49,31 @@ void Geometry::setup()
 void Geometry::makeCube()
 {
   Shaper<Vertex>::makeCube(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometry::makeIcoSphere()
 {
   Shaper<Vertex>::makeIcoSphere(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometry::makePlane()
 {
   Shaper<Vertex>::makePlane(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometry::makeSphere()
 {
   Shaper<Vertex>::makeSphere(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometry::makeUVSphere()
 {
   Shaper<Vertex>::makeUVSphere(vertices, indices);
-  setup();
+  load();
 }
 
 Geometrypn::Geometrypn() {}
@@ -82,10 +82,10 @@ Geometrypn::Geometrypn(std::vector<Vertexpn> &vertices, std::vector<unsigned int
 {
   this->vertices = vertices;
   this->indices = indices;
-  setup();
+  load();
 }
 
-void Geometrypn::setup()
+void Geometrypn::load()
 {
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
@@ -110,31 +110,31 @@ void Geometrypn::setup()
 void Geometrypn::makeCube()
 {
   Shaper<Vertexpn>::makeCube(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometrypn::makeIcoSphere()
 {
   Shaper<Vertexpn>::makeIcoSphere(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometrypn::makePlane()
 {
   Shaper<Vertexpn>::makePlane(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometrypn::makeSphere()
 {
   Shaper<Vertexpn>::makeSphere(vertices, indices);
-  setup();
+  load();
 }
 
 void Geometrypn::makeUVSphere()
 {
   Shaper<Vertexpn>::makeUVSphere(vertices, indices);
-  setup();
+  load();
 }
 
 template <class VertexType>

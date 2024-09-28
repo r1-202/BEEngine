@@ -143,7 +143,7 @@ int main()
   geometry.vertices[1].texture_coordinates = glm::vec2(1.0,0.0);
   geometry.vertices[2].texture_coordinates = glm::vec2(0.0,0.0);
   geometry.vertices[3].texture_coordinates = glm::vec2(0.0,1.0);
-  geometry.setup();
+  geometry.load();
 
   BERender::Texture texture;
   texture.load("Resources/Textures/container.png");

@@ -17,7 +17,6 @@ namespace BERender
     glm::mat4 model;
 
     void draw();
-    void setup();
   };
 }
 #endif // MESH_H
