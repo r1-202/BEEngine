@@ -114,7 +114,7 @@ int main()
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
   glfwSetScrollCallback(window, scroll_callback);
-  //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
@@ -143,6 +143,7 @@ int main()
   geometry.vertices[1].texture_coordinates = glm::vec2(1.0,0.0);
   geometry.vertices[2].texture_coordinates = glm::vec2(0.0,0.0);
   geometry.vertices[3].texture_coordinates = glm::vec2(0.0,1.0);
+  geometry.setup();
 
   BERender::Texture texture;
   texture.load("Resources/Textures/container.png");
