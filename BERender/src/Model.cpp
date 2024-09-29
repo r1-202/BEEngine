@@ -9,3 +9,8 @@ void Model::draw()
     meshes[i].draw();
   }
 }
+
+void Model::load(std::string path)
+{
+  
+}
