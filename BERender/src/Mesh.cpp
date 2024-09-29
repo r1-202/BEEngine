@@ -5,6 +5,6 @@ void Mesh::draw()
 {
   shader->use();
   shader->setMat4("model", model);
-  material->setup();
+  material->setup(shader);
   geometry->draw();
 }

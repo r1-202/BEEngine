@@ -4,6 +4,7 @@
 #include <iostream>
 #include <Texture.h>
 #include <glm/glm.hpp>
+#include <Shader.h>
 
 namespace BERender
 {
@@ -12,7 +13,7 @@ namespace BERender
   public:
     std::string name;
     virtual void load(std::string path, std::string name, std::string directory) = 0;
-    virtual void setup() = 0;
+    virtual void setup(Shader *shader) = 0;
   };
 
   class Material : MaterialTemplate
@@ -34,7 +35,7 @@ namespace BERender
     Texture ambient_occlusion_map;
 
     virtual void load(std::string path, std::string name, std::string directory);
-    virtual void setup();
+    virtual void setup(Shader *shader);
   };
 
   class MaterialUniform : MaterialTemplate
@@ -50,7 +51,7 @@ namespace BERender
     float roughness;
 
     virtual void load(std::string path, std::string name, std::string directory);
-    virtual void setup();
+    virtual void setup(Shader *shader);
 
     MaterialUniform(Material &material);
   };
