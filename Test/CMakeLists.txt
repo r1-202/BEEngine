@@ -16,6 +16,10 @@ target_include_directories(TextureGeometryTest PUBLIC ${CMAKE_SOURCE_DIR}/common
   
 target_link_libraries(TextureGeometryTest PUBLIC BERender)
 
+add_executable(VKWindowTest VKWindowTest.cpp)
+
+target_link_libraries(VKWindowTest VKBERender)
+
 file(GLOB_RECURSE RESOURCE_FILES "${CMAKE_SOURCE_DIR}/Resources/*")
 
 add_custom_command(
