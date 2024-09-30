@@ -20,6 +20,10 @@ add_executable(VKWindowTest VKWindowTest.cpp)
 
 target_link_libraries(VKWindowTest VKBERender)
 
+add_executable(VKDrawTriangle VKDrawTriangle.cpp)
+
+target_link_libraries(VKDrawTriangle VKBERender)
+
 file(GLOB_RECURSE RESOURCE_FILES "${CMAKE_SOURCE_DIR}/Resources/*")
 
 add_custom_command(
