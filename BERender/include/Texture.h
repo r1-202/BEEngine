@@ -18,7 +18,7 @@ namespace BERender
     void load(std::string path);
   };
 
-  class CubeMap : Texture
+  class CubeMap : public Texture
   {
   public:
     void load(std::vector<std::string> faces);

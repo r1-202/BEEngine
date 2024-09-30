@@ -16,7 +16,7 @@ namespace BERender
     virtual void setup(Shader *shader) = 0;
   };
 
-  class Material : MaterialTemplate
+  class Material : public MaterialTemplate
   {
   public:
     glm::vec3 ambient_color;
@@ -38,7 +38,7 @@ namespace BERender
     virtual void setup(Shader *shader);
   };
 
-  class MaterialUniform : MaterialTemplate
+  class MaterialUniform : public MaterialTemplate
   {
   public:
     glm::vec3 ambient_color;

@@ -8,10 +8,15 @@ namespace BERender
 {
   class Model
   {
+  public:
+    std::string directory;
+    std::string obj_file;
+    std::string mtl_file;
     std::vector<Mesh> meshes;
 
     void draw();
     void load(std::string path);
+    void loadOBJ(std::string path);
   };
 }
 #endif // MODEL_H

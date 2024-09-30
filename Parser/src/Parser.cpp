@@ -51,3 +51,40 @@ int Parser::getNextInt(std::string &buffer, int &i)
   std::string token = getNextToken(buffer, i);
   return std::stoi(token);
 }
+
+Parser::Triple Parser::getNextTriple(std::string &buffer, int &i)
+{
+  clearSpace(buffer, i);
+  std::string token = getNextToken(buffer, i);
+  int j = 0;
+  Triple t;
+  std::string int_string = "";
+  for (; j < token.size(); ++j)
+  {
+    if (token[j] == '/')
+    {
+      t.a = stoi(int_string);
+      int_string = "";
+      ++j;
+      break;
+    }
+    int_string += token[j];
+  }
+  for (; j < token.size(); ++j)
+  {
+    if (token[j] == '/')
+    {
+      t.b = stoi(int_string);
+      int_string = "";
+      ++j;
+      break;
+    }
+    int_string += token[j];
+  }
+  for (; j < token.size(); ++j)
+  {
+    int_string += token[j];
+  }
+  t.c = stoi(int_string);
+  return t;
+}
