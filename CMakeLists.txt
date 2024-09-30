@@ -11,6 +11,8 @@ add_subdirectory(common/glad)
 
 add_subdirectory(common/stb_image)
 
+add-add_subdirectory(Parser)
+
 add_subdirectory(BERender)
 
 add_subdirectory(VKBERender)

@@ -3,4 +3,4 @@ add_library(BERender src/Camera.cpp src/Geometry.cpp src/Shader.cpp src/Texture.
 target_include_directories(BERender PUBLIC ${CMAKE_SOURCE_DIR}/common/include 
                             PUBLIC include)
 
-target_link_libraries(BERender PUBLIC glfw PUBLIC glad PUBLIC stb_image)
+target_link_libraries(BERender PUBLIC glfw PUBLIC glad PUBLIC stb_image PUBLIC Parser)
