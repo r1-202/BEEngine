@@ -1,9 +1,112 @@
 #include <Material.h>
+#include <Parser.h>
 
 using namespace BERender;
 
 void Material::load(std::string path, std::string name, std::string directory)
 {
+  // defaults
+  this->name = name;
+  ambient_color = glm::vec3(1.0, 1.0, 1.0);
+  diffuse_color = glm::vec3(1.0, 1.0, 1.0);
+  specular_color = glm::vec3(1.0, 1.0, 1.0);
+  emission_color = glm::vec3(1.0, 1.0, 1.0);
+  alpha = 1.0;
+  specular_exponent = 250;
+  index_of_refraction = 1.0;
+
+  std::fstream mtl_file_stream;
+  mtl_file_stream.open(path);
+  std::string buffer;
+  bool found = false;
+
+  while (getline(mtl_file_stream, buffer) && !found)
+  {
+    int i = 0;
+    std::string token = Parser::getNextToken(buffer, i);
+    if (token == "newmtl")
+    {
+      token = Parser::getNextToken(buffer, i);
+      if (token == name)
+      {
+        found = true;
+      }
+    }
+  }
+
+  while (found && getline(mtl_file_stream, buffer))
+  {
+    int i = 0;
+    std::string token = Parser::getNextToken(buffer, i);
+    if (token == "Ka")
+    {
+      ambient_color = glm::vec3(Parser::getNextFloat(buffer, i),
+                                Parser::getNextFloat(buffer, i),
+                                Parser::getNextFloat(buffer, i));
+    }
+    else if (token == "Kd")
+    {
+      diffuse_color = glm::vec3(Parser::getNextFloat(buffer, i),
+                                Parser::getNextFloat(buffer, i),
+                                Parser::getNextFloat(buffer, i));
+    }
+    else if (token == "Ks")
+    {
+      specular_color = glm::vec3(Parser::getNextFloat(buffer, i),
+                                 Parser::getNextFloat(buffer, i),
+                                 Parser::getNextFloat(buffer, i));
+    }
+    else if (token == "Ke")
+    {
+      emission_color = glm::vec3(Parser::getNextFloat(buffer, i),
+                                 Parser::getNextFloat(buffer, i),
+                                 Parser::getNextFloat(buffer, i));
+    }
+    else if (token == "d")
+    {
+      alpha = Parser::getNextFloat(buffer, i);
+    }
+    else if (token == "Ns")
+    {
+      specular_exponent = Parser::getNextFloat(buffer, i);
+    }
+    else if (token == "Ni")
+    {
+      index_of_refraction = Parser::getNextFloat(buffer, i);
+    }
+    else if (token == "Pr")
+    {
+      roughness = Parser::getNextFloat(buffer, i);
+    }
+    else if (token == "map_Kd")
+    {
+      diffuse_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "map_Ks")
+    {
+      specular_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "map_Ke")
+    {
+      emission_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "map_Bump")
+    {
+      normal_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "map_Pr")
+    {
+      roughness_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "map_Pa")
+    {
+      ambient_occlusion_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+    }
+    else if (token == "newmtl")
+    {
+      found = false;
+    }
+  }
 }
 
 void Material::setup(Shader *shader)
