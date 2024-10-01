@@ -16,6 +16,12 @@ target_include_directories(TextureGeometryTest PUBLIC ${CMAKE_SOURCE_DIR}/common
   
 target_link_libraries(TextureGeometryTest PUBLIC BERender)
 
+add_executable(LoadingTest LoadingTest.cpp)
+
+target_include_directories(LoadingTest PUBLIC ${CMAKE_SOURCE_DIR}/common/include)
+  
+target_link_libraries(LoadingTest PUBLIC BERender)
+
 add_executable(VKWindowTest VKWindowTest.cpp)
 
 target_link_libraries(VKWindowTest VKBERender)
