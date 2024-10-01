@@ -13,6 +13,10 @@ namespace BERender
     unsigned int VAO, VBO, EBO;
     std::vector<unsigned int> indices;
     void draw();
+    virtual void addVertex(const glm::vec3 &position,
+                           const glm::vec3 &normal,
+                           const glm::vec2 &texture_coordinates) = 0;
+    virtual int getVertexCount() = 0;
     virtual void load() = 0;
     virtual void makeSphere() = 0;
     virtual void makeUVSphere() = 0;
@@ -29,6 +33,10 @@ namespace BERender
     virtual void load();
     Geometry();
     Geometry(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices);
+    virtual void addVertex(const glm::vec3 &position,
+                           const glm::vec3 &normal,
+                           const glm::vec2 &texture_coordinates);
+    virtual int getVertexCount();
     virtual void makeSphere();
     virtual void makeUVSphere();
     virtual void makeCube();
@@ -43,6 +51,10 @@ namespace BERender
     virtual void load();
     Geometrypn();
     Geometrypn(std::vector<Vertexpn> &vertices, std::vector<unsigned int> &indices);
+    virtual void addVertex(const glm::vec3 &position,
+                           const glm::vec3 &normal,
+                           const glm::vec2 &texture_coordinates);
+    virtual int getVertexCount();
     virtual void makeSphere();
     virtual void makeUVSphere();
     virtual void makeCube();

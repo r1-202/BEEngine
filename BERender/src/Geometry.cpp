@@ -21,6 +21,22 @@ Geometry::Geometry(std::vector<Vertex> &vertices, std::vector<unsigned int> &ind
   load();
 }
 
+void Geometry::addVertex(const glm::vec3 &position,
+                         const glm::vec3 &normal,
+                         const glm::vec2 &texture_coordinates)
+{
+  Vertex vertex;
+  vertex.position = position;
+  vertex.normal = normal;
+  vertex.texture_coordinates = texture_coordinates;
+  vertices.push_back(vertex);
+}
+
+int Geometry::getVertexCount()
+{
+  return vertices.size();
+}
+
 void Geometry::load()
 {
   glGenVertexArrays(1, &VAO);
@@ -83,6 +99,21 @@ Geometrypn::Geometrypn(std::vector<Vertexpn> &vertices, std::vector<unsigned int
   this->vertices = vertices;
   this->indices = indices;
   load();
+}
+
+void Geometrypn::addVertex(const glm::vec3 &position,
+                           const glm::vec3 &normal,
+                           const glm::vec2 &texture_coordinates)
+{
+  Vertexpn vertex;
+  vertex.position = position;
+  vertex.normal = normal;
+  vertices.push_back(vertex);
+}
+
+int Geometrypn::getVertexCount()
+{
+  return vertices.size();
 }
 
 void Geometrypn::load()

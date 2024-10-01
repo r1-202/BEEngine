@@ -24,13 +24,18 @@ void Model::loadOBJ(std::string path)
   std::fstream obj_file_stream;
   obj_file_stream.open(path);
   std::string buffer = "";
-  bool first = true;
-  bool material_waiting_for_object = false;
-  bool object_waiting_for_material = false;
 
   std::vector<glm::vec3> positions;
+  positions.push_back(glm::vec3(0.));
+
   std::vector<glm::vec3> normals;
+  normals.push_back(glm::vec3(0.));
+
   std::vector<glm::vec2> texture_coordinates;
+  texture_coordinates.push_back(glm::vec2(0.));
+  
+  std::vector<int> indices;
+  indices.push_back(-1);
 
   while (getline(obj_file_stream, buffer))
   {
@@ -38,23 +43,36 @@ void Model::loadOBJ(std::string path)
     std::string token = Parser::getNextToken(buffer, i);
     if (token == "v")
     {
-      positions.push_back(glm::vec3(Parser::getNextFloat(buffer, i),
-                                    Parser::getNextFloat(buffer, i),
-                                    Parser::getNextFloat(buffer, i)));
+      positions.emplace_back(Parser::getNextFloat(buffer, i),
+                             Parser::getNextFloat(buffer, i),
+                             Parser::getNextFloat(buffer, i));
+      indices.emplace_back(-1);
     }
     else if (token == "vn")
     {
-      normals.push_back(glm::vec3(Parser::getNextFloat(buffer, i),
-                                  Parser::getNextFloat(buffer, i),
-                                  Parser::getNextFloat(buffer, i)));
+      normals.emplace_back(Parser::getNextFloat(buffer, i),
+                           Parser::getNextFloat(buffer, i),
+                           Parser::getNextFloat(buffer, i));
     }
     else if (token == "vt")
     {
-      texture_coordinates.push_back(glm::vec2(Parser::getNextFloat,
-                                              Parser::getNextFloat));
+      texture_coordinates.emplace_back(Parser::getNextFloat,
+                                       Parser::getNextFloat);
     }
     else if (token == "f")
     {
+      for (int j = 0; j < 3; ++j)
+      {
+        Parser::Triple triple = Parser::getNextTriple(buffer, i);
+        if (indices[triple.a] == -1)
+        {
+          indices[triple.a] = meshes.back().geometry->getVertexCount();
+          meshes.back().geometry->addVertex(positions[triple.a],
+                                            normals[triple.b],
+                                            texture_coordinates[triple.c]);
+        }
+        meshes.back().geometry->indices.emplace_back(indices[triple.a]);
+      }
     }
     else if (token == "mtllib")
     {
@@ -79,6 +97,9 @@ void Model::loadOBJ(std::string path)
       {
         material = meshes[j].material;
       }
+      meshes.emplace_back();
+      meshes.back().geometry = new Geometry();
+      meshes.back().material = material;
     }
   }
 }
