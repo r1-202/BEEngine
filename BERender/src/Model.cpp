@@ -18,6 +18,14 @@ void Model::load(std::string path)
   loadOBJ(path);
 }
 
+void Model::setShader(Shader *shader)
+{
+  for (int i = 0; i < meshes.size(); ++i)
+  {
+    meshes[i].shader = shader;
+  }
+}
+
 void Model::loadOBJ(std::string path)
 {
   Parser::splitTail(path, obj_file, directory);
@@ -33,7 +41,7 @@ void Model::loadOBJ(std::string path)
 
   std::vector<glm::vec2> texture_coordinates;
   texture_coordinates.push_back(glm::vec2(0.));
-  
+
   std::vector<int> indices;
   indices.push_back(-1);
 

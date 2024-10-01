@@ -17,6 +17,7 @@ namespace BERender
     void draw();
     void load(std::string path);
     void loadOBJ(std::string path);
+    void setShader(Shader *shader);
   };
 }
 #endif // MODEL_H

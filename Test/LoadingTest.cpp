@@ -120,7 +120,6 @@ int main()
   glEnable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
 
-
   glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
                                           (float)screen_width / (float)screen_height,
                                           0.1f, 100.0f);
@@ -132,22 +131,9 @@ int main()
   BERender::Shader shader_program("Resources/Shaders/LoadingTest/VertexShader.glsl",
                                   "Resources/Shaders/LoadingTest/FragmentShader.glsl");
 
-  shader_program.use();
-  shader_program.setMat4("projection", projection);
-  shader_program.setMat4("model", model);
-
-  BERender::Geometry geometry;
-  geometry.makePlane();
-  geometry.vertices[0].texture_coordinates = glm::vec2(1.0,1.0);
-  geometry.vertices[1].texture_coordinates = glm::vec2(1.0,0.0);
-  geometry.vertices[2].texture_coordinates = glm::vec2(0.0,0.0);
-  geometry.vertices[3].texture_coordinates = glm::vec2(0.0,1.0);
-  geometry.load();
-
-  BERender::Texture texture;
-  texture.load("Resources/Textures/container.png");
-  shader_program.setInt("image_texture", 0);
-  glBindTexture(GL_TEXTURE_2D, texture.id);
+  BERender::Model backpack;
+  backpack.load("Resources/OBJModels/backpack/backpack.obj");
+  backpack.setShader(&shader_program);
 
   while (!glfwWindowShouldClose(window))
   {
@@ -164,7 +150,7 @@ int main()
                                             0.1f, 100.0f);
     shader_program.setMat4("view", view);
     shader_program.setMat4("projection", projection);
-    geometry.draw();
+    backpack.draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
     // std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';
