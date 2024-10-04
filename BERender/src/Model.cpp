@@ -39,6 +39,10 @@ void Model::loadOBJ(std::string path)
   Parser::splitTail(path, obj_file, directory);
   std::fstream obj_file_stream;
   obj_file_stream.open(path);
+  if (!obj_file_stream.is_open())
+  {
+    std::cout << path << " file not open successfully";
+  }
   std::string buffer = "";
 
   std::vector<glm::vec3> positions;
