@@ -16,6 +16,7 @@ namespace BERender
     virtual void addVertex(const glm::vec3 &position,
                            const glm::vec3 &normal,
                            const glm::vec2 &texture_coordinates) = 0;
+    virtual void print() = 0;
     virtual int getVertexCount() = 0;
     virtual void load() = 0;
     virtual void makeSphere() = 0;
@@ -36,6 +37,7 @@ namespace BERender
     virtual void addVertex(const glm::vec3 &position,
                            const glm::vec3 &normal,
                            const glm::vec2 &texture_coordinates);
+    virtual void print();
     virtual int getVertexCount();
     virtual void makeSphere();
     virtual void makeUVSphere();
@@ -54,6 +56,7 @@ namespace BERender
     virtual void addVertex(const glm::vec3 &position,
                            const glm::vec3 &normal,
                            const glm::vec2 &texture_coordinates);
+    virtual void print();
     virtual int getVertexCount();
     virtual void makeSphere();
     virtual void makeUVSphere();

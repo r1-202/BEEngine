@@ -32,6 +32,28 @@ void Geometry::addVertex(const glm::vec3 &position,
   vertices.push_back(vertex);
 }
 
+void Geometry::print()
+{
+  std::cout << "Vertices:\n";
+  for (int i = 0; i < vertices.size(); ++i)
+  {
+    std::cout << i << ": (" << vertices[i].position.x << ","
+              << vertices[i].position.y << ","
+              << vertices[i].position.z << ")\n";
+    std::cout << i << ": (" << vertices[i].normal.x << ","
+              << vertices[i].normal.y << ","
+              << vertices[i].normal.z << ")\n";
+    std::cout << i << ": (" << vertices[i].texture_coordinates.x << ","
+     << vertices[i].texture_coordinates.y << "," << ")\n\n";
+  }
+
+  std::cout<<"\n\nIndices:\n";
+  for(int i=0;i<indices.size();++i)
+  {
+    std::cout<<indices[i]<<",";
+  }
+}
+
 int Geometry::getVertexCount()
 {
   return vertices.size();
