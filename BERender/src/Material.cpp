@@ -89,7 +89,6 @@ void Material::load(std::string path, std::string name, std::string directory)
     else if (token == "map_Ks")
     {
       specular_map.load(directory + "/" + Parser::getNextToken(buffer, i));
-                      std::cout<<"here\n"<<directory<<'\n';
     }
     else if (token == "map_Ke")
     {
