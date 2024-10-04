@@ -5,7 +5,7 @@ void Parser::splitTail(std::string &full, std::string &tail, std::string &rest)
   tail = "";
   rest = "";
   int i;
-  for (int i = full.size() - 1; i >= 0; --i)
+  for (i = full.size() - 1; i >= 0; --i)
   {
     if (full[i] == '/')
       break;
@@ -16,7 +16,7 @@ void Parser::splitTail(std::string &full, std::string &tail, std::string &rest)
   }
   for (int j = 0; j < i; ++j)
   {
-    rest += full[i];
+    rest += full[j];
   }
 }
 

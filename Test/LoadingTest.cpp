@@ -132,9 +132,9 @@ int main()
                                   "Resources/Shaders/LoadingTest/FragmentShader.glsl");
 
   BERender::Model backpack;
-  std::cout<<"before";
+  std::cout<<"before\n";
   backpack.load("Resources/OBJModels/backpack/backpack.obj");
-  std::cout<<"after";
+  std::cout<<"after\n";
   backpack.setShader(&shader_program);
   backpack.setModelMatrix(model);
 

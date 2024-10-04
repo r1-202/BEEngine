@@ -17,6 +17,10 @@ void Material::load(std::string path, std::string name, std::string directory)
 
   std::fstream mtl_file_stream;
   mtl_file_stream.open(path);
+  if(!mtl_file_stream.is_open())
+  {
+    std::cout<<path<<" file not opened successfully\n";
+  }
   std::string buffer;
   bool found = false;
 
@@ -85,6 +89,7 @@ void Material::load(std::string path, std::string name, std::string directory)
     else if (token == "map_Ks")
     {
       specular_map.load(directory + "/" + Parser::getNextToken(buffer, i));
+                      std::cout<<"here\n"<<directory<<'\n';
     }
     else if (token == "map_Ke")
     {

@@ -41,7 +41,7 @@ void Model::loadOBJ(std::string path)
   obj_file_stream.open(path);
   if (!obj_file_stream.is_open())
   {
-    std::cout << path << " file not open successfully";
+    std::cout << path << " file not open successfully\n";
   }
   std::string buffer = "";
 
@@ -55,7 +55,6 @@ void Model::loadOBJ(std::string path)
   texture_coordinates.push_back(glm::vec2(0.));
 
   std::vector<int> indices;
-  indices.push_back(-1);
 
   while (getline(obj_file_stream, buffer))
   {
@@ -84,6 +83,9 @@ void Model::loadOBJ(std::string path)
       for (int j = 0; j < 3; ++j)
       {
         Parser::Triple triple = Parser::getNextTriple(buffer, i);
+        --triple.a;
+        --triple.b;
+        --triple.c;
         if (indices[triple.a] == -1)
         {
           indices[triple.a] = meshes.back().geometry->getVertexCount();
