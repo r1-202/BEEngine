@@ -135,6 +135,7 @@ int main()
   std::cout<<"before\n";
   backpack.load("Resources/OBJModels/test/test.obj");
   std::cout<<"after\n";
+  backpack.meshes[0].geometry->draw();
   backpack.setShader(&shader_program);
   backpack.setModelMatrix(model);
 
