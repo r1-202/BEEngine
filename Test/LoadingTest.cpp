@@ -113,7 +113,7 @@ int main()
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
   glfwSetScrollCallback(window, scroll_callback);
-  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_BLEND);
@@ -124,7 +124,7 @@ int main()
                                           (float)screen_width / (float)screen_height,
                                           0.1f, 100.0f);
 
-  glm::mat4 view = camera.getViewMatrix();
+  glm::mat4 view;
 
   glm::mat4 model = glm::mat4(5.0f);
 
@@ -132,8 +132,18 @@ int main()
                                   "Resources/Shaders/LoadingTest/FragmentShader.glsl");
 
   BERender::Model backpack;
+  std::cout<<"before";
   backpack.load("Resources/OBJModels/backpack/backpack.obj");
+  std::cout<<"after";
   backpack.setShader(&shader_program);
+  backpack.setModelMatrix(model);
+
+  shader_program.setFloat("point_lights[0].constant", 1);
+  shader_program.setFloat("point_lights[0].linear", 0.1);
+  shader_program.setFloat("point_lights[0].quadratic", 0.1);
+  shader_program.setVec3("point_lights[0].ambient_color", .5, .5, .5);
+  shader_program.setVec3("point_lights[0].diffuse_color", .7, .7, .7);
+  shader_program.setVec3("point_lights[0].specular_color", 1., 1., 1.);
 
   while (!glfwWindowShouldClose(window))
   {
@@ -150,6 +160,11 @@ int main()
                                             0.1f, 100.0f);
     shader_program.setMat4("view", view);
     shader_program.setMat4("projection", projection);
+    shader_program.setVec3("view_position", camera.position);
+    shader_program.setVec3("point_lights[0].position",
+                           glm::sin(current_frame),
+                           5.0,
+                           glm::cos(current_frame));
     backpack.draw();
     glfwSwapBuffers(window);
     glfwPollEvents();

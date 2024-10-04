@@ -26,6 +26,14 @@ void Model::setShader(Shader *shader)
   }
 }
 
+void Model::setModelMatrix(glm::mat4 model)
+{
+  for (int i = 0; i < meshes.size(); ++i)
+  {
+    meshes[i].model = model;
+  }
+}
+
 void Model::loadOBJ(std::string path)
 {
   Parser::splitTail(path, obj_file, directory);
@@ -64,8 +72,8 @@ void Model::loadOBJ(std::string path)
     }
     else if (token == "vt")
     {
-      texture_coordinates.emplace_back(Parser::getNextFloat,
-                                       Parser::getNextFloat);
+      texture_coordinates.emplace_back(Parser::getNextFloat(buffer, i),
+                                       Parser::getNextFloat(buffer, i));
     }
     else if (token == "f")
     {

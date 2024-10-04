@@ -2,6 +2,7 @@
 #define VERTEX_H
 
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 namespace BERender
 {

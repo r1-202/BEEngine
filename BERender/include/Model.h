@@ -18,6 +18,7 @@ namespace BERender
     void load(std::string path);
     void loadOBJ(std::string path);
     void setShader(Shader *shader);
+    void setModelMatrix(glm::mat4 model);
   };
 }
 #endif // MODEL_H
