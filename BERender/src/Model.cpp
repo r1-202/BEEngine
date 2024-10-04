@@ -62,21 +62,21 @@ void Model::loadOBJ(std::string path)
     std::string token = Parser::getNextToken(buffer, i);
     if (token == "v")
     {
-      positions.emplace_back(Parser::getNextFloat(buffer, i),
-                             Parser::getNextFloat(buffer, i),
-                             Parser::getNextFloat(buffer, i));
-      indices.emplace_back(-1);
+      positions.push_back(glm::vec3(Parser::getNextFloat(buffer, i),
+                                    Parser::getNextFloat(buffer, i),
+                                    Parser::getNextFloat(buffer, i)));
+      indices.push_back(-1);
     }
     else if (token == "vn")
     {
-      normals.emplace_back(Parser::getNextFloat(buffer, i),
-                           Parser::getNextFloat(buffer, i),
-                           Parser::getNextFloat(buffer, i));
+      normals.push_back(glm::vec3((Parser::getNextFloat(buffer, i),
+                                   Parser::getNextFloat(buffer, i),
+                                   Parser::getNextFloat(buffer, i))));
     }
     else if (token == "vt")
     {
-      texture_coordinates.emplace_back(Parser::getNextFloat(buffer, i),
-                                       Parser::getNextFloat(buffer, i));
+      texture_coordinates.push_back(glm::vec2(Parser::getNextFloat(buffer, i),
+                                              Parser::getNextFloat(buffer, i)));
     }
     else if (token == "f")
     {
@@ -93,7 +93,7 @@ void Model::loadOBJ(std::string path)
                                             normals[triple.b],
                                             texture_coordinates[triple.c]);
         }
-        meshes.back().geometry->indices.emplace_back(indices[triple.a]);
+        meshes.back().geometry->indices.push_back(indices[triple.a]);
       }
     }
     else if (token == "mtllib")
@@ -119,7 +119,7 @@ void Model::loadOBJ(std::string path)
       {
         material = meshes[j].material;
       }
-      meshes.emplace_back();
+      meshes.push_back(Mesh());
       meshes.back().geometry = new Geometry();
       meshes.back().material = material;
     }
