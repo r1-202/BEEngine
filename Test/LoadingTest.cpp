@@ -113,11 +113,8 @@ int main()
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
   glfwSetScrollCallback(window, scroll_callback);
-  //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  //glEnable(GL_BLEND);
-  //glEnable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
 
   glm::mat4 projection = glm::perspective(glm::radians(camera.zoom),
@@ -132,10 +129,7 @@ int main()
                                   "Resources/Shaders/LoadingTest/FragmentShader.glsl");
 
   BERender::Model backpack;
-  std::cout<<"before\n";
-  backpack.load("Resources/OBJModels/test/test.obj");
-  std::cout<<"after\n";
-  backpack.meshes[0].geometry->print();
+  backpack.load("Resources/OBJModels/backpack/backpack.obj");
   backpack.setShader(&shader_program);
   backpack.setModelMatrix(model);
 
@@ -158,7 +152,6 @@ int main()
     backpack.draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
-    // std::cout << camera.position.x << ' ' << camera.position.y << ' ' << camera.position.z << '\n';
   }
   glfwTerminate();
   return 0;

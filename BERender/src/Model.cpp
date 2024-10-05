@@ -94,8 +94,8 @@ void Model::loadOBJ(std::string path)
         {
           indices[triple.a] = meshes.back().geometry->getVertexCount();
           meshes.back().geometry->addVertex(positions[triple.a],
-                                            normals[triple.b],
-                                            texture_coordinates[triple.c]);
+                                            normals[triple.c],
+                                            texture_coordinates[triple.b]);
         }
         meshes.back().geometry->indices.push_back(indices[triple.a]);
       }
