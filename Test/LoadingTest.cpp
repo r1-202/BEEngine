@@ -126,7 +126,7 @@ int main()
 
   glm::mat4 view;
 
-  glm::mat4 model = glm::mat4(5.0f);
+  glm::mat4 model = glm::translate(glm::mat4(1.0f),glm::vec3(0,0,-1));
 
   BERender::Shader shader_program("Resources/Shaders/LoadingTest/VertexShader.glsl",
                                   "Resources/Shaders/LoadingTest/FragmentShader.glsl");

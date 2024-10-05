@@ -16,6 +16,10 @@ void Model::draw()
 void Model::load(std::string path)
 {
   loadOBJ(path);
+  for (int i = 0; i < meshes.size(); ++i)
+  {
+    meshes[i].geometry->load();
+  }
 }
 
 void Model::setShader(Shader *shader)
@@ -46,13 +50,10 @@ void Model::loadOBJ(std::string path)
   std::string buffer = "";
 
   std::vector<glm::vec3> positions;
-  positions.push_back(glm::vec3(0.));
 
   std::vector<glm::vec3> normals;
-  normals.push_back(glm::vec3(0.));
 
   std::vector<glm::vec2> texture_coordinates;
-  texture_coordinates.push_back(glm::vec2(0.));
 
   std::vector<int> indices;
 
@@ -62,21 +63,24 @@ void Model::loadOBJ(std::string path)
     std::string token = Parser::getNextToken(buffer, i);
     if (token == "v")
     {
-      positions.push_back(glm::vec3(Parser::getNextFloat(buffer, i),
-                                    Parser::getNextFloat(buffer, i),
-                                    Parser::getNextFloat(buffer, i)));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      positions.push_back(glm::vec3(x, y, z));
       indices.push_back(-1);
     }
     else if (token == "vn")
     {
-      normals.push_back(glm::vec3((Parser::getNextFloat(buffer, i),
-                                   Parser::getNextFloat(buffer, i),
-                                   Parser::getNextFloat(buffer, i))));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      normals.push_back(glm::vec3(x, y, z));
     }
     else if (token == "vt")
     {
-      texture_coordinates.push_back(glm::vec2(Parser::getNextFloat(buffer, i),
-                                              Parser::getNextFloat(buffer, i)));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      texture_coordinates.push_back(glm::vec2(x, y));
     }
     else if (token == "f")
     {
