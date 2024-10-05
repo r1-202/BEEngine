@@ -29,5 +29,5 @@ uniform Material material;
 
 void main()
 {        
-    FragColor = texture(material.diffuse_map,fs_in.texture_coordinates);
+  FragColor = texture(material.diffuse_map, fs_in.texture_coordinates);
 }
