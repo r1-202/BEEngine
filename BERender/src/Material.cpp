@@ -17,9 +17,9 @@ void Material::load(std::string path, std::string name, std::string directory)
 
   std::fstream mtl_file_stream;
   mtl_file_stream.open(path);
-  if(!mtl_file_stream.is_open())
+  if (!mtl_file_stream.is_open())
   {
-    std::cout<<path<<" file not opened successfully\n";
+    std::cout << path << " file not opened successfully\n";
   }
   std::string buffer;
   bool found = false;
@@ -44,27 +44,31 @@ void Material::load(std::string path, std::string name, std::string directory)
     std::string token = Parser::getNextToken(buffer, i);
     if (token == "Ka")
     {
-      ambient_color = glm::vec3(Parser::getNextFloat(buffer, i),
-                                Parser::getNextFloat(buffer, i),
-                                Parser::getNextFloat(buffer, i));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      ambient_color = glm::vec3(x, y, z);
     }
     else if (token == "Kd")
     {
-      diffuse_color = glm::vec3(Parser::getNextFloat(buffer, i),
-                                Parser::getNextFloat(buffer, i),
-                                Parser::getNextFloat(buffer, i));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      diffuse_color = glm::vec3(x, y, z);
     }
     else if (token == "Ks")
     {
-      specular_color = glm::vec3(Parser::getNextFloat(buffer, i),
-                                 Parser::getNextFloat(buffer, i),
-                                 Parser::getNextFloat(buffer, i));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      specular_color = glm::vec3(x, y, z);
     }
     else if (token == "Ke")
     {
-      emission_color = glm::vec3(Parser::getNextFloat(buffer, i),
-                                 Parser::getNextFloat(buffer, i),
-                                 Parser::getNextFloat(buffer, i));
+      float x = Parser::getNextFloat(buffer, i);
+      float y = Parser::getNextFloat(buffer, i);
+      float z = Parser::getNextFloat(buffer, i);
+      emission_color = glm::vec3(x, y, z);
     }
     else if (token == "d")
     {
