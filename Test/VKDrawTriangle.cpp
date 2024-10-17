@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <vector>
 #include <cstring>
+#include <optional>
 
 const unsigned int WIDTH = 800;
 const unsigned int HEIGHT = 600;
@@ -54,6 +55,7 @@ private:
   GLFWwindow *window;
   VkInstance instance;
   VkDebugUtilsMessengerEXT debug_messenger;
+  VkPhysicalDevice physical_device;
 
 public:
   void run()
@@ -77,6 +79,7 @@ private:
   {
     createInstance();
     setupDebugMessenger();
+    pickPhysicalDevice();
   }
 
   void mainLoop()
@@ -225,6 +228,68 @@ private:
     {
       throw std::runtime_error("failed to set up debug messenger!");
     }
+  }
+
+  void pickPhysicalDevice()
+  {
+    physical_device = VK_NULL_HANDLE;
+    unsigned int device_count = 0;
+    vkEnumeratePhysicalDevices(instance, &device_count, nullptr);
+    if (device_count == 0)
+    {
+      throw std::runtime_error("failed to find GPUs with Vulkan support!");
+    }
+    std::vector<VkPhysicalDevice> devices(device_count);
+    vkEnumeratePhysicalDevices(instance, &device_count, devices.data());
+    for (const auto &device : devices)
+    {
+      if (isDeviceSuitable(device))
+      {
+        physical_device = device;
+        break;
+      }
+    }
+    if (physical_device == VK_NULL_HANDLE)
+    {
+      throw std::runtime_error("failed to find a suitable GPU!");
+    }
+  }
+  bool isDeviceSuitable(VkPhysicalDevice device)
+  {
+    QueueFamilyIndices indices = findQueueFamilies(device);
+
+    return indices.isComplete();
+  }
+  struct QueueFamilyIndices
+  {
+    std::optional<unsigned int> graphics_family;
+    bool isComplete()
+    {
+      return graphics_family.has_value();
+    }
+  };
+
+  QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device)
+  {
+    QueueFamilyIndices indices;
+    unsigned int queue_family_count = 0;
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, nullptr);
+    std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, queue_families.data());
+    int i=0;
+    for(const auto& queue_family : queue_families)
+    {
+      if(queue_family.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+      {
+        indices.graphics_family = i;
+      }
+      if(indices.isComplete())
+      {
+        break;
+      }
+      ++i;
+    }
+    return indices;
   }
 };
 
