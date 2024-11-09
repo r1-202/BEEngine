@@ -111,6 +111,7 @@ int main()
     last_frame = current_frame;
     processInput(window);
     glfwPollEvents();
+    glfwSwapBuffers(window);
   }
   glfwTerminate();
   return 0;

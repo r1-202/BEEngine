@@ -20,9 +20,14 @@ void Parser::splitTail(std::string &full, std::string &tail, std::string &rest)
   }
 }
 
+bool isWhiteSpace(char c)
+{
+  return c==' '||c=='\n'||c=='\r'||c=='\t';
+}
+
 void Parser::clearSpace(std::string &buffer, int &i)
 {
-  while (buffer[i] == ' ' && i < buffer.size())
+  while (isWhiteSpace(buffer[i]) && i < buffer.size())
     ++i;
 }
 
@@ -30,7 +35,7 @@ std::string Parser::getNextToken(std::string &buffer, int &i)
 {
   clearSpace(buffer, i);
   std::string token = "";
-  while (buffer[i] != ' ' && i < buffer.size())
+  while (!isWhiteSpace(buffer[i]) && i < buffer.size())
   {
     token += buffer[i];
     ++i;
